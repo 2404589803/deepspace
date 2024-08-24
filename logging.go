@@ -123,7 +123,7 @@ func logRequest(
 				indent = "  "
 				render = boldRed
 			)
-			if errors.As(err, new(*DeepSeekError)) {
+			if errors.As(err, new(*deepseekError)) {
 				logger.Printf("  - %s: \n", boldYellow("DeepSeek Error"))
 				indent += "  "
 				render = boldYellow
