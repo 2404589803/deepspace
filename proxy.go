@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/2404589803/deepspace/detector/repeat"
-	"github.com/24458983/moonpalace/merge"
+	"github.com/2404589803/deepspace/merge"
 	"github.com/spf13/cobra"
 	"github.com/tidwall/sjson"
 )
@@ -175,7 +175,7 @@ func buildProxy(
 			requestMethod             = r.Method
 			requestPath               = r.URL.Path
 			requestQuery              = r.URL.RawQuery
-			deepseek                  *deepseek
+			deepseek                  *DeepSeek
 			deepseekID                string
 			deepseekGID               string
 			deepseekUID               string
@@ -366,11 +366,11 @@ func buildProxy(
 						}
 						var chunk DeepSeekChunk
 						if err = json.Unmarshal(value, &chunk); err == nil && chunk.ID != "" {
-							if moonshot == nil {
-								moonshot = new(DeepSeek)
+							if deepseek == nil {
+								deepseek = new(DeepSeek)
 							}
-							.ID = chunk.ID
-							moonshotID = moonshot.ID
+							deepseek.ID = chunk.ID
+							deepseekID = deepseek.ID
 							if chunk.Choices != nil && len(chunk.Choices) > 0 {
 								for _, choice := range chunk.Choices {
 									if responseTTFT == 0 && hasStreamToken(choice.Delta) {
@@ -521,7 +521,7 @@ func buildProxy(
 			for _, part := range parts {
 				if part = strings.TrimSpace(part); strings.HasPrefix(part, "dur=") {
 					timing := strings.TrimPrefix(part, "dur=")
-					moonshotServerTiming, _ = strconv.Atoi(timing)
+					deepseekServerTiming, _ = strconv.Atoi(timing)
 					break
 				}
 			}
@@ -530,7 +530,7 @@ func buildProxy(
 		responseStatus = newResponse.Status
 		responseStatusCode = newResponse.StatusCode
 		if responseStatusCode != http.StatusOK {
-			err = &DeepSeekError{message: string(responseBody)}
+			err = &deepseekError{message: string(responseBody)}
 		}
 	}
 }
@@ -648,7 +648,7 @@ type deepseekError struct {
 }
 
 func (d *deepseekError) Error() string {
-	return m.message
+	return d.message
 }
 
 func toErrMsg(err error) string {
