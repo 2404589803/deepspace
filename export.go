@@ -108,9 +108,9 @@ func genFilename(request *Request) (filename string) {
 				strings.TrimPrefix(request.RequestPath, "/v1/"),
 				"/", "-"),
 		)
-		if request.deepseekUID.Valid {
+		if request.DeepSeekUID.Valid {
 			filenameBuilder.WriteString("-")
-			filenameBuilder.WriteString(request.deepseekUID.String)
+			filenameBuilder.WriteString(request.DeepSeekUID.String)
 		}
 		filenameBuilder.WriteString("-")
 		filenameBuilder.WriteString(request.CreatedAt.Format("20060102150405"))
