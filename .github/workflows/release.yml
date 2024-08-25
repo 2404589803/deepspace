@@ -16,6 +16,7 @@ jobs:
         with:
           go-version: ">=1.22.0"
       - uses: actions/checkout@v4
+      - run: go version  # 确保 Go 版本正确
       - run: go mod tidy
       - run: go build -o deepspace-macos-amd64
       - uses: actions/upload-artifact@v4
@@ -30,6 +31,7 @@ jobs:
         with:
           go-version: ">=1.22.0"
       - uses: actions/checkout@v4
+      - run: go version  # 确保 Go 版本正确
       - run: go mod tidy
       - run: go build -o deepspace-macos-arm64
       - uses: actions/upload-artifact@v4
@@ -44,6 +46,7 @@ jobs:
         with:
           go-version: ">=1.22.0"
       - uses: actions/checkout@v4
+      - run: go version  # 确保 Go 版本正确
       - run: go mod tidy
       - run: go build -o deepspace-windows.exe
       - uses: actions/upload-artifact@v4
@@ -58,6 +61,7 @@ jobs:
         with:
           go-version: ">=1.22.0"
       - uses: actions/checkout@v4
+      - run: go version  # 确保 Go 版本正确
       - run: go mod tidy
       - run: go build -o deepspace-linux
       - uses: actions/upload-artifact@v4
