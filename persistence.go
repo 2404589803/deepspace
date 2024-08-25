@@ -13,7 +13,6 @@ import (
 	"time"
 
 	parser "github.com/2404589803/deepspace/predicate"
-
 	"github.com/mattn/go-sqlite3"
 )
 
@@ -110,7 +109,7 @@ func tableFields(exclude ...string) (fields string) {
 	return strings.Join(fieldList, ",")
 }
 
-//go:generate python3 updateln.py
+//go:generate python updateln.py
 //go:generate defc generate --features sqlx/nort --func fields=tableFields
 type Persistence interface {
 	// createTable exec const
