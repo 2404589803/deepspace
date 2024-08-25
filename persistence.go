@@ -220,11 +220,11 @@ type Persistence interface {
 		requestMethod string,
 		requestPath string,
 		requestQuery string,
-		moonshotID string,
-		moonshotGID string,
-		moonshotUID string,
-		moonshotRequestID string,
-		moonshotServerTiming int,
+		deepseekID string,
+		deepseekGID string,
+		deepseekUID string,
+		deepseekRequestID string,
+		deepseekServerTiming int,
 		responseStatusCode int,
 		responseContentType string,
 		requestHeader string,
@@ -269,16 +269,16 @@ type Persistence interface {
 	// GetRequest query one named
 	/*
 		select *
-		from moonshot_requests
+		from deepseek_requests
 		where 1 = 1
 		  {{ if .id }}
 		  and id = :id
 		  {{ end }}
 		  {{ if .chatcmpl }}
-		  and moonshot_id = :chatcmpl
+		  and deepseek_id = :chatcmpl
 		  {{ end }}
 		  {{ if .requestid }}
-		  and moonshot_request_id = :requestid
+		  and deepseek_request_id = :requestid
 		  {{ end }}
 		;
 	*/
