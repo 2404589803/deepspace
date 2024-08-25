@@ -54,8 +54,10 @@ func (m *Merger) MergeArray(prev *[]any, next []any) {
 			if found {
 				if indexI64, err := indexNum.Int64(); err == nil {
 					index := int(indexI64)
-					for len(*prev) < (index + 1) {
-						*prev = append(*prev, make(map[string]any))
+					if len(*prev) < (index + 1) {
+						for range (index + 1) - len(*prev) {
+							*prev = append(*prev, make(map[string]any))
+						}
 					}
 					item := (*prev)[index]
 					if itemObj, isObj := item.(map[string]any); isObj {
