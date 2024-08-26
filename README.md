@@ -9,7 +9,7 @@ DeepSpace（深度空间）是一款用于调试DeepSeek的 API 的调试工具�
 - 通过 `request_id`、`chatcmpl_id` 快速检索、查看请求信息
 - 一键导出 BadCase 结构化上报数据，帮助 Deepseek 完善模型能力
 
-**推荐在代码编写和调试阶段使用 DeepSpace 作为你的 API “供应商”，以便能快速发现和定位关于 API 调用和代码编写过程中的各种问题，对于  大模型各种不符合预期的输出，你也可以通过 DeepSpace 导出请求详情并提交给 Deepseek 以改进 Deepseek 的大模型。**
+**推荐在代码编写和调试阶段使用 DeepSpace 作为你的 API “供应商”，以便能快速发现和定位关于 API 调用和代码编写过程中的各种问题，对于 Deepseek 大模型各种不符合预期的输出，你也可以通过 DeepSpace 导出请求详情并提交给 Deepseek 以改进 Deepseek 的大模型。**
 
 ## 安装方式
 
