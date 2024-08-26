@@ -70,3 +70,7 @@ $ deepspace start --port <PORT>
 ```shell
 [DeepSpace] 2024/08/26 12:12:26 DeepSpace Starts => change base_url to "http://127.0.0.1:9988/v1"
 ```
+
+你可以将导出的文件投递至以下邮箱：
+
+[api-service@deepseek.com](mailto:api-service@deepseek.com)
