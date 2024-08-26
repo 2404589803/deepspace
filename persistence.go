@@ -145,23 +145,23 @@ type Persistence interface {
 	createTable() error
 
 	// inspectTable query const
-	// pragma table_info(moonshot_requests);
+	// pragma table_info(deepseek_requests);
 	inspectTable() ([]*tableInfo, error)
 
 	// addTTFTField exec
-	// alter table moonshot_requests add response_ttft integer;
+	// alter table deepseek_requests add response_ttft integer;
 	addTTFTField() error
 
 	// addLatencyField exec
-	// alter table moonshot_requests add latency integer;
+	// alter table deepseek_requests add latency integer;
 	addLatencyField() error
 
 	// addEndpointField exec
-	// alter table moonshot_requests add endpoint text;
+	// alter table deepseek_requests add endpoint text;
 	addEndpointField() error
 
 	// Cleanup exec named const
-	// delete from moonshot_requests where created_at < :before;
+	// delete from deepseek_requests where created_at < :before;
 	Cleanup(before string) (sql.Result, error)
 
 	// Persistence query one named
@@ -248,7 +248,7 @@ type Persistence interface {
 					merge_cmpl(response_body),
 					response_body
 				) as response_body
-			from moonshot_requests
+			from deepseek_requests
 		)
 		where 1 = 1
 		  {{ if .chatOnly }}

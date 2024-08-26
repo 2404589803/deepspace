@@ -70,9 +70,9 @@ var (
 
 	__PersistenceBaseTemplate = template.Must(template.New("PersistenceBaseTemplate").Funcs(template.FuncMap{"bindvars": __PersistenceBindVars, "fields": tableFields}).Parse(""))
 
-	sqlTmpladdTTFTField     = template.Must(__PersistenceBaseTemplate.New("addTTFTField").Parse("alter table moonshot_requests add response_ttft integer;\r\n"))
-	sqlTmpladdLatencyField  = template.Must(__PersistenceBaseTemplate.New("addLatencyField").Parse("alter table moonshot_requests add latency integer;\r\n"))
-	sqlTmpladdEndpointField = template.Must(__PersistenceBaseTemplate.New("addEndpointField").Parse("alter table moonshot_requests add endpoint text;\r\n"))
+	sqlTmpladdTTFTField     = template.Must(__PersistenceBaseTemplate.New("addTTFTField").Parse("alter table deepseek_requests add response_ttft integer;\r\n"))
+	sqlTmpladdLatencyField  = template.Must(__PersistenceBaseTemplate.New("addLatencyField").Parse("alter table deepseek_requests add latency integer;\r\n"))
+	sqlTmpladdEndpointField = template.Must(__PersistenceBaseTemplate.New("addEndpointField").Parse("alter table deepseek_requests add endpoint text;\r\n"))
 	sqlTmplPersistence      = template.Must(__PersistenceBaseTemplate.New("Persistence").Parse("insert into deepseek_requests ( request_method, request_path, request_query, created_at {{ if .requestContentType }},request_content_type{{ end }} {{ if .requestID }},request_id{{ end }} {{ if .deepseekID }},deepseek_id{{ end }} {{ if .deepseekGID }},deepseek_gid{{ end }} {{ if .deepseekUID }},deepseek_uid{{ end }} {{ if .deepseekRequestID }},deepseek_request_id{{ end }} {{ if .deepseekServerTiming }},deepseek_server_timing{{ end }} {{ if .responseStatusCode }},response_status_code{{ end }} {{ if .responseContentType }},response_content_type{{ end }} {{ if .requestHeader }},request_header{{ end }} {{ if .requestBody }},request_body{{ end }} {{ if .responseHeader }},response_header{{ end }} {{ if .responseBody }},response_body{{ end }} {{ if .programError }},error{{ end }} {{ if .responseTTFT }},response_ttft{{ end }} {{ if .latency }},latency{{ end }} {{ if .endpoint }},endpoint{{ end }} ) values ( :requestMethod, :requestPath, :requestQuery, :createdAt {{ if .requestContentType }},:requestContentType{{ end }} {{ if .requestID }},:requestID{{ end }} {{ if .deepseekID }},:deepseekID{{ end }} {{ if .deepseekGID }},:deepseekGID{{ end }} {{ if .deepseekUID }},:deepseekUID{{ end }} {{ if .deepseekRequestID }},:deepseekRequestID{{ end }} {{ if .deepseekServerTiming }},:deepseekServerTiming{{ end }} {{ if .responseStatusCode }},:responseStatusCode{{ end }} {{ if .responseContentType }},:responseContentType{{ end }} {{ if .requestHeader }},:requestHeader{{ end }} {{ if .requestBody }},:requestBody{{ end }} {{ if .responseHeader }},:responseHeader{{ end }} {{ if .responseBody }},:responseBody{{ end }} {{ if .programError }},:programError{{ end }} {{ if .responseTTFT }},:responseTTFT{{ end }} {{ if .latency }},:latency{{ end }} {{ if .endpoint }},:endpoint{{ end }} );\r\nselect last_insert_rowid();\r\n"))
 	sqlTmplGetRequest       = template.Must(__PersistenceBaseTemplate.New("GetRequest").Parse("select * from deepseek_requests where 1 = 1 {{ if .id }} and id = :id {{ end }} {{ if .chatcmpl }} and deepseek_id = :chatcmpl {{ end }} {{ if .requestid }} and deepseek_request_id = :requestid {{ end }} ;\r\n"))
 )
@@ -131,7 +131,7 @@ func (__imp *implPersistence) inspectTable() ([]*tableInfo, error) {
 
 	argListinspectTable = __PersistenceArguments{}
 
-	queryinspectTable := "pragma table_info(moonshot_requests);\r\n"
+	queryinspectTable := "pragma table_info(deepseek_requests);\r\n"
 
 	txinspectTable, errinspectTable := __imp.__core.Beginx()
 	if errinspectTable != nil {
@@ -337,7 +337,7 @@ func (__imp *implPersistence) Cleanup(before string) (sql.Result, error) {
 		errCleanup error
 	)
 
-	queryCleanup := "delete from moonshot_requests where created_at < :before;\r\n"
+	queryCleanup := "delete from deepseek_requests where created_at < :before;\r\n"
 
 	txCleanup, errCleanup := __imp.__core.Beginx()
 	if errCleanup != nil {
@@ -500,7 +500,7 @@ func (__imp *implPersistence) ListRequests(n int64, chatOnly bool, predicate str
 		argListListRequests = append(argListListRequests, arg)
 		return __PersistenceBindVars(len(__PersistenceMergeArgs(arg)))
 	}
-	sqlTmplListRequests := template.Must(template.New("ListRequests").Funcs(template.FuncMap{"bind": __ListRequestsBindFunc, "bindvars": __PersistenceBindVars, "fields": tableFields}).Parse("select * from ( select {{ fields \"response_body\" }}, iif( response_content_type = 'text/event-stream' and response_body is not null, merge_cmpl(response_body), response_body ) as response_body from moonshot_requests ) where 1 = 1 {{ if .chatOnly }} and request_path like '%/chat/completions' {{ end }} {{ if .predicate }} and ({{ .predicate }}) {{ end }} order by id desc {{ if .n }} limit {{ bind .n }} {{ end }} ;\r\n"))
+	sqlTmplListRequests := template.Must(template.New("ListRequests").Funcs(template.FuncMap{"bind": __ListRequestsBindFunc, "bindvars": __PersistenceBindVars, "fields": tableFields}).Parse("select * from ( select {{ fields \"response_body\" }}, iif( response_content_type = 'text/event-stream' and response_body is not null, merge_cmpl(response_body), response_body ) as response_body from deepseek_requests ) where 1 = 1 {{ if .chatOnly }} and request_path like '%/chat/completions' {{ end }} {{ if .predicate }} and ({{ .predicate }}) {{ end }} order by id desc {{ if .n }} limit {{ bind .n }} {{ end }} ;\r\n"))
 
 	sqlListRequests := __PersistenceGetBuffer()
 	defer __PersistencePutBuffer(sqlListRequests)
