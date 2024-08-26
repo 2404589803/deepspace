@@ -60,7 +60,7 @@ Use "deepspace [command] --help" for more information about a command.
 
 ### 启动服务
 
-使用以下命令启动 MoonPalace 代理服务器：
+使用以下命令启动 DeepSpace 代理服务器：
 
 ```shell
 $ deepspace start --port <PORT>
