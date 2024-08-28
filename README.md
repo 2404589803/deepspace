@@ -1,33 +1,37 @@
 # DeepSpace
+
 <div align="center">
 <img src=assets/1.jpg width="60%"/>
 </div>
-DeepSpace（深度空间）是一款用于调试 DeepSeek API 的工具，由社区制作，灵感来源于 [MoonPalace](https://github.com/MoonshotAI/moonpalace?tab=readme-ov-file)。
 
-## 特性
+[简体中文](README_cn.md)
 
-- **全平台支持：**
+DeepSpace is a tool for debugging the DeepSeek API, developed by the community and inspired by [MoonPalace](https://github.com/MoonshotAI/moonpalace?tab=readme-ov-file).
+
+## Features
+
+- **Cross-platform Support:**
   - [x] Mac
   - [x] Windows
   - [x] Linux
-- **简单易用**：启动后只需将 `base_url` 替换为 `http://localhost:9988` 即可开始调试。
-- **捕获完整请求**，包括网络错误时的“事故现场”。
-- **快速检索**：通过 `request_id`、`chatcmpl_id` 快速检索、查看请求信息。
-- **一键导出 BadCase 结构化上报数据**，帮助 DeepSeek 完善模型能力。
+- **User-friendly**: Simply replace `base_url` with `http://localhost:9988` after starting the service to begin debugging.
+- **Complete Request Capture**, including error details in case of network failures.
+- **Fast Retrieval**: Quickly search and view request information using `request_id` or `chatcmpl_id`.
+- **One-click Export of Structured BadCase Reports**, aiding DeepSeek in enhancing model capabilities.
 
-**推荐在代码编写和调试阶段使用 DeepSpace 作为你的 API “供应商”，以便能快速发现和定位关于 API 调用和代码编写过程中的各种问题。对于 DeepSeek 大模型各种不符合预期的输出，你也可以通过 DeepSpace 导出请求详情并提交给 DeepSeek 以改进 DeepSeek 的大模型。**
+**It is recommended to use DeepSpace as your API “provider” during code development and debugging stages. This allows you to quickly identify and resolve issues related to API calls and code implementation. For any unexpected outputs from the DeepSeek large model, you can also export request details via DeepSpace and submit them to DeepSeek to help improve the model.**
 
-## 安装方式
+## Installation
 
-### 使用 `go` 命令安装
+### Install using the `go` command
 
-如果你已经安装了 `go` 工具链，可以执行以下命令来安装：
+If you have the `go` toolchain installed, you can install DeepSpace by executing the following command:
 
 ```shell
 $ go install github.com/2404589803/deepspace@latest
 ```
 
-上述命令会在你的 `$GOPATH/bin/` 目录中安装编译后的二进制文件。运行 `deepspace` 命令来检查是否成功安装：
+This command will install the compiled binary in your `$GOPATH/bin/` directory. To verify the installation, run the following command:
 
 ```shell
 $ deepspace
@@ -52,33 +56,33 @@ Flags:
 Use "deepspace [command] --help" for more information about a command.
 ```
 
-*如果你仍然无法检索到 `deepspace` 二进制文件，请尝试将 `$GOPATH/bin/` 目录添加到你的 `$PATH` 环境变量中。*
+*If the `deepspace` binary is not found, try adding the `$GOPATH/bin/` directory to your `$PATH` environment variable.*
 
-### 从 Releases 页面下载二进制（可执行）文件
+### Download Executable from the Releases Page
 
-你也可以从 [Releases](https://github.com/2404589803/deepspace/releases) 页面下载编译好的二进制文件：
+Alternatively, you can download the precompiled binary from the [Releases](https://github.com/2404589803/deepspace/releases) page:
 
 - deepspace-linux
-- deepspace-macos-amd64 => 对应 Intel 版本的 Mac
-- deepspace-macos-arm64 => 对应 Apple Silicon 版本的 Mac
+- deepspace-macos-amd64 => for Intel-based Macs
+- deepspace-macos-arm64 => for Apple Silicon-based Macs
 - deepspace-windows.exe
 
-## 使用方式
+## Usage
 
-### 启动服务
+### Starting the Service
 
-使用以下命令启动 DeepSpace 代理服务器：
+Use the following command to start the DeepSpace proxy server:
 
 ```shell
 $ deepspace start --port <PORT>
 ```
 
-DeepSpace 会在本地启动一个 HTTP 服务器，`--port` 参数指定 DeepSpace 监听的本地端口，默认值为 `9988`。当 DeepSpace 启动成功时，会输出：
+DeepSpace will start a local HTTP server. The `--port` parameter specifies the local port that DeepSpace listens to, with a default value of `9988`. Upon successful startup, the following message will be displayed:
 
 ```shell
 [DeepSpace] 2024/08/26 12:12:26 DeepSpace Starts => change base_url to "http://127.0.0.1:9988/v1"
 ```
 
-你可以将导出的文件投递至以下邮箱：
+You can submit the exported files to the following email:
 
 [api-service@deepseek.com](mailto:api-service@deepseek.com)
