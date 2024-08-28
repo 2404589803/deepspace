@@ -1,7 +1,7 @@
-# DeepSpace
-<div align="center">
-<img src=assets/1.jpg width="60%"/>
-</div>
+<h1>
+   <img src="assets/1.jpg" alt="1" style="height: 1.5em; vertical-align: bottom;" />
+   DeepSpace
+</h1>
 DeepSpace（深度空间）是一款用于调试 DeepSeek API 的工具，由社区制作，灵感来源于 [MoonPalace](https://github.com/MoonshotAI/moonpalace?tab=readme-ov-file)。
 
 ## 特性
